@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>title</key>
+	<string>Purge</string>
+	<key>entry</key>
+	<dict>
+		<key>cell</key>
+		<string>PSLinkCell</string>
+		<key>label</key>
+		<string>Purge</string>
+		<key>icon</key>
+		<string>purgeLogo.png</string>
+	</dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Welcome to Purge</string>
+			<key>alignment</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Options</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>label</key>
+			<string>Kill all alert</string>
+			<key>default</key>
+			<true/>
+			<key>key</key>
+			<string>warningAlertKey</string>
+			<key>defaults</key>
+			<string>com.sirifl0w.purge</string>
+			<key>PostNotification</key>
+			<string>com.sirifl0w.purge.settingschanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>label</key>
+			<string>Auto dismiss switcher</string>
+			<key>default</key>
+			<true/>
+			<key>key</key>
+			<string>autoDismissKey</string>
+			<key>defaults</key>
+			<string>com.sirifl0w.purge</string>
+			<key>PostNotification</key>
+			<string>com.sirifl0w.purge.settingschanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>action</key>
+			<string>followme</string>
+			<key>label</key>
+			<string>Follow me on twitter</string>
+			<key>icon</key>
+			<string>twitterLogo.png</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Purge 1.1 by Sirifl0w. Icon by @iJailpod.</string>
+		</dict>
+	</array>
+</dict>
+</plist>

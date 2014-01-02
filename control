@@ -1,9 +1,0 @@
-Package: com.sirifl0w.purge
-Name: Purge
-Depends: mobilesubstrate
-Version: 0.0.1
-Architecture: iphoneos-arm
-Description: An iOS 7 tweak. Kill all apps in the iOS app switcher via a long hold on the app snapshots.
-Maintainer: Sirifl0w
-Author: Sirifl0w
-Section: Tweaks
