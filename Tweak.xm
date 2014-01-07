@@ -12,30 +12,36 @@
 @property(readonly, nonatomic) NSArray *applicationList;
 - (void)_quitAppAtIndex:(unsigned int)arg1;
 - (void)_layout;
+
+// custom methods
+- (void)killAllApps;
+
 @end
 
 @interface SBMediaController : NSObject
-{}
+
 + (id)sharedInstance;
 - (id)nowPlayingApplication;
 - (BOOL)isPlaying;
+
 @end
 
 @interface SBUIController : NSObject
-{}
+
 + (id)sharedInstance;
 - (void)dismissSwitcherAnimated:(BOOL)arg1;
+
 @end
 
-@interface SBApplication
-{}
+@interface SBApplication : NSObject
+
+@property (copy) NSString *displayIdentifier;
+
 @end
 
 static UIAlertView *killAlert;
-static UILongPressGestureRecognizer *longHoldPage;
-static UILongPressGestureRecognizer *longHoldIcon;
-static BOOL warningAlert;
-static BOOL autoDismiss;
+static BOOL warningAlert = YES;
+static BOOL autoDismiss = YES;
 
 %hook SBAppSliderController
 
@@ -43,17 +49,17 @@ static BOOL autoDismiss;
 
 	%orig();
 
-	UIView *appPage = MSHookIvar<UIView *>(self, "_pageView");
-    UIView *iconView = MSHookIvar<UIView *>(self, "_iconView");
+	UIView *pageView = MSHookIvar<UIView *>(self, "_pageView");
+    UIView *iconView = MSHookIvar<UIView*>(self, "_iconView");
 
-    longHoldPage = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecieved:)];
-    [appPage addGestureRecognizer:longHoldPage];
-    [longHoldPage release];
+    UILongPressGestureRecognizer *longHoldPage = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecieved:)];
+    UILongPressGestureRecognizer *longHoldIcon = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecieved:)];
 
-    longHoldIcon = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecieved:)];
+    [pageView addGestureRecognizer:longHoldPage];
     [iconView addGestureRecognizer:longHoldIcon];
-    [longHoldIcon release];
 
+    [longHoldPage release];
+    [longHoldIcon release];
 
 }
 
@@ -61,59 +67,57 @@ static BOOL autoDismiss;
 
 - (void)killAllApps {
 
-    NSDictionary *purgePrefs = [[NSDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.sirifl0w.purge.plist"];
-    autoDismiss = [purgePrefs objectForKey:@"autoDismissKey"] == nil ? YES : [[purgePrefs objectForKey:@"autoDismissKey"] boolValue];
+    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.sirifl0w.purge.plist"];
+    autoDismiss = [prefs objectForKey:@"autoDismissKey"] == nil ? YES : [[prefs objectForKey:@"autoDismissKey"] boolValue];
 
-// exclude now playing app when killing all apps when music is playing.  Remember to add to preferences. 
+// exclude now playing app when killing all apps when music is playing.
 
-    SBMediaController *mController = [%c(SBMediaController) sharedInstance];
-    NSString *nowPlayingIdenitifer = [[mController nowPlayingApplication] displayIdentifier];
+    SBMediaController *mediaController = [%c(SBMediaController) sharedInstance];
+    NSString *nowPlayingIdenitifer = [[mediaController nowPlayingApplication] displayIdentifier];
 
         for (id identifier in [self applicationList]) {
-                    if (![identifier isEqualToString:@"com.apple.springboard"]) {
-                    if ((![identifier isEqualToString:nowPlayingIdenitifer]) && [mController isPlaying]) {
-                            [self _quitAppAtIndex:[[self applicationList] indexOfObject:identifier]];
-                    if (autoDismiss)        
-                            [[%c(SBUIController) sharedInstance] dismissSwitcherAnimated:YES];
-                        } else if (![mController isPlaying]) {
-                            [self _quitAppAtIndex:[[self applicationList] indexOfObject:identifier]];
-                    if (autoDismiss)        
-                            [[%c(SBUIController) sharedInstance] dismissSwitcherAnimated:YES];
-                        }
+            if (![identifier isEqualToString:@"com.apple.springboard"]) {
+                if ((![identifier isEqualToString:nowPlayingIdenitifer]) && [mediaController isPlaying]) {
+                        [self _quitAppAtIndex:[[self applicationList] indexOfObject:identifier]];
+                    } else if (![mediaController isPlaying]) {
+                        [self _quitAppAtIndex:[[self applicationList] indexOfObject:identifier]];
                     }
-                    }
+                }
+            }
+
+        if (autoDismiss) {     
+            [[%c(SBUIController) sharedInstance] dismissSwitcherAnimated:YES];
+        }
 }
 
 %new
 
 -(void)gestureRecieved:(UILongPressGestureRecognizer *)recognizer {
 
-    NSDictionary *purgePrefs = [[NSDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.sirifl0w.purge.plist"];
-    warningAlert = [purgePrefs objectForKey:@"warningAlertKey"] == nil ? YES : [[purgePrefs objectForKey:@"warningAlertKey"] boolValue];
-    
-        if (recognizer.state == UIGestureRecognizerStateBegan) {
+    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.sirifl0w.purge.plist"];
+    warningAlert = [prefs objectForKey:@"warningAlertKey"] == nil ? YES : [[prefs objectForKey:@"warningAlertKey"] boolValue];
+
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
         if (warningAlert) {    
-        if ([[self applicationList] count] > 1) {
-                killAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Are you sure you want to kill all apps?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
-} else { 
+            if ([[self applicationList] count] > 1) {
+                killAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Kill all apps?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];       
+            } else { 
                 killAlert = [[UIAlertView alloc] initWithTitle:nil message:@"You have no apps in the app switcher." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        }
+            }
                 [killAlert show];
                 [killAlert release];
-} else {
-                [self killAllApps];
-}
-}
+            } else {
+            [self killAllApps];
+        }
+    }
 }
 
 %new
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-        if (buttonIndex != 0) {
-                [self killAllApps];
-} else {
-        // do nothing
-        }
+    if (buttonIndex != 0) {
+        [self killAllApps];
+    }
 }
 
 %end
