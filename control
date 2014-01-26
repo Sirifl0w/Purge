@@ -1,7 +1,7 @@
 Package: com.sirifl0w.purge
 Name: Purge
 Depends: mobilesubstrate, firmware (>= 7.0), preferenceloader
-Version: 1.2beta
+Version: 1.2
 Architecture: iphoneos-arm
 Description: Kill all apps from the iOS 7 app switcher.
 Maintainer: Sirifl0w <sirifl0w@gmail.com>

@@ -2,17 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>title</key>
-	<string>Purge</string>
-	<key>entry</key>
-	<dict>
-		<key>cell</key>
-		<string>PSLinkCell</string>
-		<key>label</key>
-		<string>Purge</string>
-		<key>icon</key>
-		<string>purgeLogo.png</string>
-	</dict>
 	<key>items</key>
 	<array>
 		<dict>
@@ -24,6 +13,8 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>footerText</key>
+			<string>Excluding the now playing app only applies when music is playing.</string>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
@@ -59,13 +50,27 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>label</key>
+			<string>Exclude now playing app</string>
+			<key>default</key>
+			<true/>
+			<key>key</key>
+			<string>nowPlayingKey</string>
+			<key>defaults</key>
+			<string>com.sirifl0w.purge</string>
+			<key>PostNotification</key>
+			<string>com.sirifl0w.purge.settingschanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>action</key>
-			<string>followme</string>
+			<string>followme:</string>
 			<key>label</key>
 			<string>Follow me on twitter</string>
 			<key>icon</key>
@@ -73,10 +78,22 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Source code</string>
+			<key>action</key>
+			<string>PSourceCode:</string>
+			<key>icon</key>
+			<string>githubLogo.png</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>Purge 1.1 by Sirifl0w. Icon by @iJailpod.</string>
+			<string>© 2014, Sirifl0w. Thanks @iJailpod for Purge&apos;s icon.</string>
 		</dict>
 	</array>
+	<key>title</key>
+	<string>Purge</string>
 </dict>
 </plist>

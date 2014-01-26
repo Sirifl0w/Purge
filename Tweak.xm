@@ -1,8 +1,6 @@
 #import <UIKit/UIKit.h>
 
-@interface UIApplication (Purge)
--(void)applicationOpenURL:(id)url;
-@end
+#define PURGE_PREFS @"/var/mobile/Library/Preferences/com.sirifl0w.purge.plist"
 
 @interface SBAppSliderController : UIViewController 
 {
@@ -42,6 +40,7 @@
 static UIAlertView *killAlert;
 static BOOL warningAlert = YES;
 static BOOL autoDismiss = YES;
+static BOOL nowPlaying = YES;
 
 %hook SBAppSliderController
 
@@ -67,19 +66,21 @@ static BOOL autoDismiss = YES;
 
 - (void)killAllApps {
 
-    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.sirifl0w.purge.plist"];
+    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
     autoDismiss = [prefs objectForKey:@"autoDismissKey"] == nil ? YES : [[prefs objectForKey:@"autoDismissKey"] boolValue];
-
-// exclude now playing app when killing all apps when music is playing.
+    nowPlaying = [prefs objectForKey:@"nowPlayingKey"] == nil ? YES : [[prefs objectForKey:@"nowPlayingKey"] boolValue];
+    
+    // exclude now playing app
 
     SBMediaController *mediaController = [%c(SBMediaController) sharedInstance];
     NSString *nowPlayingIdenitifer = [[mediaController nowPlayingApplication] displayIdentifier];
+    BOOL excludeNowPlayingApp = (nowPlaying && [mediaController isPlaying]);
 
-        for (id identifier in [self applicationList]) {
+        for (NSString *identifier in [self applicationList]) {
             if (![identifier isEqualToString:@"com.apple.springboard"]) {
-                if ((![identifier isEqualToString:nowPlayingIdenitifer]) && [mediaController isPlaying]) {
+                if ((![identifier isEqualToString:nowPlayingIdenitifer]) && excludeNowPlayingApp) {
                         [self _quitAppAtIndex:[[self applicationList] indexOfObject:identifier]];
-                    } else if (![mediaController isPlaying]) {
+                    } else if (!excludeNowPlayingApp) {
                         [self _quitAppAtIndex:[[self applicationList] indexOfObject:identifier]];
                     }
                 }
@@ -94,7 +95,7 @@ static BOOL autoDismiss = YES;
 
 -(void)gestureRecieved:(UILongPressGestureRecognizer *)recognizer {
 
-    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.sirifl0w.purge.plist"];
+    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
     warningAlert = [prefs objectForKey:@"warningAlertKey"] == nil ? YES : [[prefs objectForKey:@"warningAlertKey"] boolValue];
 
     if (recognizer.state == UIGestureRecognizerStateBegan) {
@@ -123,7 +124,7 @@ static BOOL autoDismiss = YES;
 %end
 
 static void preferences() {
-    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.sirifl0w.purge.plist"];
+    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
     [prefs release];
 }
 
@@ -134,13 +135,4 @@ static void preferences() {
     preferences();
     [pool drain];
 }
-
-@implementation NSObject (Purge)
-
-- (void)followme
-{
-[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.twitter.com/Sirifl0w"]];
-}
-
-@end
 

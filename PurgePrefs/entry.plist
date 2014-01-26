@@ -1,0 +1,10 @@
+{
+	entry = {
+		icon = "purgeLogo.png";
+		bundle = PurgePrefs;
+		cell = PSLinkCell;
+		detail = "PurgePrefsListController";
+		isController = 1;
+		label = Purge;
+	};
+}
