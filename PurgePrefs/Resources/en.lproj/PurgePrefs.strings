@@ -1,0 +1,6 @@
+KALabel = "Kill all alert";
+ADLabel = "Auto dismiss switcher";
+NPCondition = "Only applies when music is playing.";
+NPLabel = "Exclude now playing app";
+BLDescription = "Prevent the removal of one app of your choice. The chosen app will not be removed from the app switcher upon killing all apps.";
+BLLabel = "Blacklisted app";

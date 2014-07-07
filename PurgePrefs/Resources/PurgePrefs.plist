@@ -5,26 +5,18 @@
 	<key>items</key>
 	<array>
 		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>Welcome to Purge</string>
-			<key>alignment</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>footerText</key>
-			<string>Excluding the now playing app only applies when music is playing.</string>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>Options</string>
+			<key>cellClass</key>
+			<string>P_Header</string>
+			<key>height</key>
+			<integer>130</integer>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
+			<key>icon</key>
+			<string>PurgeAlert.png</string>
 			<key>label</key>
-			<string>Kill all alert</string>
+			<string>KALabel</string>
 			<key>default</key>
 			<true/>
 			<key>key</key>
@@ -36,9 +28,15 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSSwitchCell</string>
+			<key>icon</key>
+			<string>PurgeCheckmark.png</string>
 			<key>label</key>
-			<string>Auto dismiss switcher</string>
+			<string>ADLabel</string>
 			<key>default</key>
 			<true/>
 			<key>key</key>
@@ -49,10 +47,18 @@
 			<string>com.sirifl0w.purge.settingschanged</string>
 		</dict>
 		<dict>
+			<key>footerText</key>
+			<string>NPCondition</string>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
+			<key>icon</key>
+			<string>PurgePlay.png</string>
 			<key>label</key>
-			<string>Exclude now playing app</string>
+			<string>NPLabel</string>
 			<key>default</key>
 			<true/>
 			<key>key</key>
@@ -65,35 +71,56 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-			<key>action</key>
-			<string>followme:</string>
-			<key>label</key>
-			<string>Follow me on twitter</string>
-			<key>icon</key>
-			<string>twitterLogo.png</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-			<key>label</key>
-			<string>Source code</string>
-			<key>action</key>
-			<string>PSourceCode:</string>
-			<key>icon</key>
-			<string>githubLogo.png</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>© 2014, Sirifl0w. Thanks @iJailpod for Purge&apos;s icon.</string>
+			<string>BLDescription</string>
+		</dict>
+		<dict>
+			<key>bundle</key>
+			<string>AppList</string>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>icon</key>
+			<string>PurgePrivacy.png</string>
+			<key>label</key>
+			<string>BLLabel</string>
+			<key>isController</key>
+			<string>1</string>
+			<key>ALChangeNotification</key>
+			<string>com.sirifl0w.purge.settingschanged</string>
+			<key>ALSettingsPath</key>
+			<string>/var/mobile/Library/Preferences/com.sirifl0w.purge.plist</string>
+			<key>ALSingleEnabledMode</key>
+			<true/>
+			<key>ALSettingsKey</key>
+			<string>blacklistKey</string>
+			<key>ALSectionDescriptors</key>
+			<array>
+				<dict>
+					<key>title</key>
+					<string>System Applications</string>
+					<key>predicate</key>
+					<string>isSystemApplication = TRUE</string>
+					<key>cell-class-name</key>
+					<string>ALCheckCell</string>
+					<key>icon-size</key>
+					<string>29</string>
+					<key>suppress-hidden-apps</key>
+					<string>1</string>
+				</dict>
+				<dict>
+					<key>title</key>
+					<string>User Applications</string>
+					<key>predicate</key>
+					<string>isSystemApplication = FALSE</string>
+					<key>cell-class-name</key>
+					<string>ALCheckCell</string>
+					<key>icon-size</key>
+					<string>29</string>
+					<key>suppress-hidden-apps</key>
+					<string>1</string>
+				</dict>
+			</array>
 		</dict>
 	</array>
-	<key>title</key>
-	<string>Purge</string>
 </dict>
 </plist>

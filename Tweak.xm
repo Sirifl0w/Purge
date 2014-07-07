@@ -12,7 +12,8 @@
 - (void)_layout;
 
 // custom methods
-- (void)killAllApps;
+- (void)P_killAllApps;
+- (void)P_dismissAppSwitcher;
 
 @end
 
@@ -41,6 +42,15 @@ static UIAlertView *killAlert;
 static BOOL warningAlert = YES;
 static BOOL autoDismiss = YES;
 static BOOL nowPlaying = YES;
+static NSString *blacklistID;
+
+static void loadPreferences() {
+    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
+    autoDismiss = [prefs objectForKey:@"autoDismissKey"] == nil ? YES : [[prefs objectForKey:@"autoDismissKey"] boolValue];
+    nowPlaying = [prefs objectForKey:@"nowPlayingKey"] == nil ? YES : [[prefs objectForKey:@"nowPlayingKey"] boolValue];
+    warningAlert = [prefs objectForKey:@"warningAlertKey"] == nil ? YES : [[prefs objectForKey:@"warningAlertKey"] boolValue];
+    [prefs release];
+}
 
 %hook SBAppSliderController
 
@@ -48,8 +58,8 @@ static BOOL nowPlaying = YES;
 
 	%orig();
 
-	UIView *pageView = MSHookIvar<UIView *>(self, "_pageView");
-    UIView *iconView = MSHookIvar<UIView*>(self, "_iconView");
+    UIView *pageView = MSHookIvar<UIView *>(self, "_pageView");
+    UIView *iconView = MSHookIvar<UIView *>(self, "_iconView");
 
     UILongPressGestureRecognizer *longHoldPage = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecieved:)];
     UILongPressGestureRecognizer *longHoldIcon = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecieved:)];
@@ -57,46 +67,49 @@ static BOOL nowPlaying = YES;
     [pageView addGestureRecognizer:longHoldPage];
     [iconView addGestureRecognizer:longHoldIcon];
 
-    [longHoldPage release];
-    [longHoldIcon release];
-
 }
 
 %new 
 
-- (void)killAllApps {
+- (void)P_killAllApps {
 
-    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
-    autoDismiss = [prefs objectForKey:@"autoDismissKey"] == nil ? YES : [[prefs objectForKey:@"autoDismissKey"] boolValue];
-    nowPlaying = [prefs objectForKey:@"nowPlayingKey"] == nil ? YES : [[prefs objectForKey:@"nowPlayingKey"] boolValue];
-    
-    // exclude now playing app
+	NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
+	blacklistID = [prefs objectForKey:@"blacklistKey"];
 
-    SBMediaController *mediaController = [%c(SBMediaController) sharedInstance];
-    NSString *nowPlayingIdenitifer = [[mediaController nowPlayingApplication] displayIdentifier];
-    BOOL excludeNowPlayingApp = (nowPlaying && [mediaController isPlaying]);
+	SBMediaController *mediaController = [%c(SBMediaController) sharedInstance];
+	NSString *nowPlayingIdenitifer = [[mediaController nowPlayingApplication] displayIdentifier];
+	BOOL excludeNowPlayingApp = (nowPlaying && [mediaController isPlaying]);
 
-        for (NSString *identifier in [self applicationList]) {
-            if (![identifier isEqualToString:@"com.apple.springboard"]) {
-                if ((![identifier isEqualToString:nowPlayingIdenitifer]) && excludeNowPlayingApp) {
-                        [self _quitAppAtIndex:[[self applicationList] indexOfObject:identifier]];
-                    } else if (!excludeNowPlayingApp) {
-                        [self _quitAppAtIndex:[[self applicationList] indexOfObject:identifier]];
-                    }
-                }
+    for (NSString *identifier in [self applicationList]) {
+        if (![identifier isEqualToString:@"com.apple.springboard"] && ![identifier isEqualToString:blacklistID]) {
+            if ((![identifier isEqualToString:nowPlayingIdenitifer]) && excludeNowPlayingApp) {
+                    [self _quitAppAtIndex:[[self applicationList] indexOfObject:identifier]];
+                } else if (!excludeNowPlayingApp) {
+                    [self _quitAppAtIndex:[[self applicationList] indexOfObject:identifier]];
+                } 
             }
-
-        if (autoDismiss) {     
-            [[%c(SBUIController) sharedInstance] dismissSwitcherAnimated:YES];
         }
+
+// bug fix, auto dismiss failed when executing gesture upon opening the app swithcer within an app. More native fixes?
+
+    if (autoDismiss) {  
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(P_dismissAppSwitcher) userInfo:nil repeats:NO];
+    }
+
+     
+}
+
+%new
+
+- (void)P_dismissAppSwitcher {
+
+[[%c(SBUIController) sharedInstance] dismissSwitcherAnimated:YES];
+
 }
 
 %new
 
 -(void)gestureRecieved:(UILongPressGestureRecognizer *)recognizer {
-
-    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
-    warningAlert = [prefs objectForKey:@"warningAlertKey"] == nil ? YES : [[prefs objectForKey:@"warningAlertKey"] boolValue];
 
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         if (warningAlert) {    
@@ -108,7 +121,7 @@ static BOOL nowPlaying = YES;
                 [killAlert show];
                 [killAlert release];
             } else {
-            [self killAllApps];
+            [self P_killAllApps];
         }
     }
 }
@@ -117,22 +130,17 @@ static BOOL nowPlaying = YES;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != 0) {
-        [self killAllApps];
+        [self P_killAllApps];
     }
 }
 
 %end
 
-static void preferences() {
-    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
-    [prefs release];
-}
-
 %ctor {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     %init;
-    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)preferences, CFSTR("com.sirifl0w.purge.prefs"), NULL, CFNotificationSuspensionBehaviorCoalesce);
-    preferences();
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)loadPreferences, CFSTR("com.sirifl0w.purge.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
+    loadPreferences();
     [pool drain];
 }
 

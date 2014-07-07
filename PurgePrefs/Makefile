@@ -10,7 +10,7 @@ BUNDLE_NAME = PurgePrefs
 PurgePrefs_CFLAGS = -fno-objc-arc
 PurgePrefs_FILES = PurgePrefsListController.m
 PurgePrefs_INSTALL_PATH = /Library/PreferenceBundles
-PurgePrefs_FRAMEWORKS = Foundation UIKit
+PurgePrefs_FRAMEWORKS = Foundation UIKit CoreGraphics Social MessageUI
 PurgePrefs_PRIVATE_FRAMEWORKS = Preferences
 
 include $(THEOS_MAKE_PATH)/bundle.mk

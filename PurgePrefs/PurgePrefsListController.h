@@ -8,6 +8,22 @@
 
 #import "Preferences/PSListController.h"
 
-@interface PurgePrefsListController : PSListController
+@protocol MFMailComposeViewControllerDelegate <NSObject>
+@end
+
+@interface MFMailComposeViewController : UINavigationController
+{}
+
+- (id)_addAttachmentData:(id)arg1 mimeType:(id)arg2 fileName:(id)arg3;
+- (void)addAttachmentData:(id)arg1 mimeType:(id)arg2 fileName:(id)arg3;
+- (void)setMessageBody:(id)arg1 isHTML:(BOOL)arg2;
+- (void)setToRecipients:(id)arg1;
+- (void)setSubject:(id)arg1;
+
+@property(nonatomic) id <MFMailComposeViewControllerDelegate> mailComposeDelegate;
+
+@end
+
+@interface PurgePrefsListController : PSListController <MFMailComposeViewControllerDelegate>
 
 @end

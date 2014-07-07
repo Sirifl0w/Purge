@@ -6,7 +6,7 @@ include theos/makefiles/common.mk
 
 TWEAK_NAME = Purge
 Purge_FILES = Tweak.xm
-Purge_FRAMEWORKS = UIKit
+Purge_FRAMEWORKS = UIKit CoreGraphics
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
