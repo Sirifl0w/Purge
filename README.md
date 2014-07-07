@@ -19,4 +19,4 @@ v1.3
 - Ability to choose ONE app that will not be removed from the app switcher (blacklisted app).
 - Localization support.
 
-**Translators wanted!** Contact me via Twitter or email (sirifl0w@gmail.com) if you wish to translate.
+**Translators wanted!** Contact me via Twitter (@sirifl0w) or email (sirifl0w@gmail.com) if you wish to translate.
