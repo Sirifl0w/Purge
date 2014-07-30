@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 
 #define PURGE_PREFS @"/var/mobile/Library/Preferences/com.sirifl0w.purge.plist"
+#define REDUCE_MOTION_PREFS @"/var/mobile/Library/Preferences/com.apple.Accessibility.plist"
 
 @interface SBAppSliderController : UIViewController 
 {
@@ -42,14 +43,16 @@ static UIAlertView *killAlert;
 static BOOL warningAlert = YES;
 static BOOL autoDismiss = YES;
 static BOOL nowPlaying = YES;
+static BOOL reduceMotionEnabled = nil;
 static NSString *blacklistID;
 
 static void loadPreferences() {
-    NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
-    autoDismiss = [prefs objectForKey:@"autoDismissKey"] == nil ? YES : [[prefs objectForKey:@"autoDismissKey"] boolValue];
-    nowPlaying = [prefs objectForKey:@"nowPlayingKey"] == nil ? YES : [[prefs objectForKey:@"nowPlayingKey"] boolValue];
-    warningAlert = [prefs objectForKey:@"warningAlertKey"] == nil ? YES : [[prefs objectForKey:@"warningAlertKey"] boolValue];
-    [prefs release];
+    NSDictionary *P_PREFS = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
+    autoDismiss = [P_PREFS objectForKey:@"autoDismissKey"] == nil ? YES : [[P_PREFS objectForKey:@"autoDismissKey"] boolValue];
+    nowPlaying = [P_PREFS objectForKey:@"nowPlayingKey"] == nil ? YES : [[P_PREFS objectForKey:@"nowPlayingKey"] boolValue];
+    warningAlert = [P_PREFS objectForKey:@"warningAlertKey"] == nil ? YES : [[P_PREFS objectForKey:@"warningAlertKey"] boolValue];
+    blacklistID = [P_PREFS objectForKey:@"blacklistKey"];
+    [P_PREFS release];
 }
 
 %hook SBAppSliderController
@@ -73,8 +76,11 @@ static void loadPreferences() {
 
 - (void)P_killAllApps {
 
-	NSDictionary *prefs = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
-	blacklistID = [prefs objectForKey:@"blacklistKey"];
+	NSDictionary *PPrefs = [[NSDictionary alloc] initWithContentsOfFile:PURGE_PREFS];
+	blacklistID = [PPrefs objectForKey:@"blacklistKey"];
+
+	NSDictionary *RM_PREFS = [[NSDictionary alloc] initWithContentsOfFile:REDUCE_MOTION_PREFS];
+    reduceMotionEnabled = [RM_PREFS objectForKey:@"ReduceMotionEnabled"] == nil ? YES : [[RM_PREFS objectForKey:@"ReduceMotionEnabled"] boolValue];
 
 	SBMediaController *mediaController = [%c(SBMediaController) sharedInstance];
 	NSString *nowPlayingIdenitifer = [[mediaController nowPlayingApplication] displayIdentifier];
@@ -92,19 +98,19 @@ static void loadPreferences() {
 
 // bug fix, auto dismiss failed when executing gesture upon opening the app swithcer within an app. More native fixes?
 
-    if (autoDismiss) {  
-        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(P_dismissAppSwitcher) userInfo:nil repeats:NO];
-    }
-
-     
+    if (autoDismiss) {
+    	if (reduceMotionEnabled) {  
+        	[NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(P_dismissAppSwitcher) userInfo:nil repeats:NO];
+    	} else {
+			[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(P_dismissAppSwitcher) userInfo:nil repeats:NO];
+	}
+}
 }
 
 %new
 
 - (void)P_dismissAppSwitcher {
-
-[[%c(SBUIController) sharedInstance] dismissSwitcherAnimated:YES];
-
+	[[%c(SBUIController) sharedInstance] dismissSwitcherAnimated:YES];
 }
 
 %new
@@ -143,4 +149,3 @@ static void loadPreferences() {
     loadPreferences();
     [pool drain];
 }
-
