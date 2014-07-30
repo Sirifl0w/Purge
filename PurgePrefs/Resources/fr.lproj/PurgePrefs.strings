@@ -1,0 +1,11 @@
+KALabel = "Alerter avant de tout arrêter";
+ADLabel = "Fermeture auto. du multi-tâche";
+NPCondition = "Ne s'applique que quand de la musique est en cours de lecture.";
+NPLabel = "Exclure l'application en cours de lecture";
+BLDescription = "Empêcher l'arrêt' d'une application de votre choix. L'application choisie ne sera pas enlevée du multi-tâche quand vous les fermerez toutes";
+BLLabel = "Application exclue";
+WarningLabel = "Arrêter toutes les applications?";
+NoAppsLabel = "Vous n'avez aucune application dans le multi-tâches.";
+SystemApp = "Applications Système";
+UserApp = "Applications Utilisateur";
+// credit - François Derda

@@ -1,0 +1,11 @@
+KALabel = "Avviso terminazione app";
+ADLabel = "Auto chiusura selettore";
+NPCondition = "Valido solo durante la riproduzione.";
+NPLabel = "Escludi in riproduzione";
+BLDescription = "Previene la terminazione di un'applicazione a scelta. L'applicazione selezionata non verrà rimossa dal selettore durante la terminazione di tutte le applicazioni in esecuzione.";
+BLLabel = "Applicazione esclusa";
+WarningLabel = "Terminare tutte le applicazioni?";
+NoAppsLabel = "Non ci sono applicazioni terminabili nel selettore.";
+SystemApp = "Applicazioni sistema";
+UserApp = "Applicazioni utente";
+// credit - @sagitt

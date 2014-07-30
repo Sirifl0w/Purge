@@ -1,0 +1,9 @@
+KALabel = "Omitir todas las alertas";
+ADLabel = "Salir de la multitarea automáticamente";
+NPCondition = "Solamente funciona cuando la música está sonando.";
+NPLabel = "Excluir aplicación de música”;
+BLDescription = "Impedir que se cierren las aplicaciones seleccionadas. La aplicación seleccionada no se cerrará en la multitarea después de cerrar todas las aplicaciones.";
+BLLabel = "Aplicaciones excluidas";
+WarningLabel = "¿Cerrar todas las aplicaciones?";
+NoAppLabel = "No tienes aplicaciones en la multitarea.";
+//credit - @decueme

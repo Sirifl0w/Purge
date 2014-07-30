@@ -1,0 +1,9 @@
+KALabel = "Notis om att avsluta alla appar";
+ADLabel = "Stäng multitasking automatiskt";
+NPCondition = "Gäller bara när musik spelas.";
+NPLabel = "Excludera nuvarande musikapp";
+BLDescription = "Förhindra avstängning av en enskild app. Den valda appen kommer inte tas bort från multistasking när alla appar stängs.";
+BLLabel = "Excluderade appar";
+WarningLabel = "Stänga av alla appar?";
+NoAppsLabel = "Du har inga appar i multitasking.";
+// credit - Andreas Henriksson

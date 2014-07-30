@@ -1,0 +1,9 @@
+KALabel = "Alle beenden Dialog";
+ADLabel = "Multitasking direkt schließen";
+NPCondition = "Gilt nur wenn die Wiedergabe läuft.";
+NPLabel = "Medienwiedergabe nicht beenden";
+BLDescription = "Wähle eine bestimmte App aus. Diese App wird beim schließen aller Apps nicht beendet.";
+BLLabel = "App-Ausnahme";
+WarningLabel = "Alle Apps beenden?";
+NoAppLabel = "";
+//credit - Rafael Heße
