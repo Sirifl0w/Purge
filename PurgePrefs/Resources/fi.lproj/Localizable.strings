@@ -1,0 +1,24 @@
+ABOUT_PURGE = "Tietoa Purge:sta";
+
+CANCEL = "Peruuta";
+
+CONTACT_SUPPORT = "Ota yhteyttä Twitterin kautta tai käytä allaolevaa linkkiä saadaksesi tukea.";
+
+DESIGNER = "Ikonin suunnittelija @tmnlsthrn";
+
+DEVELOPER = "Kehittänyt @Sirifl0w";
+
+NO_APPS_LABEL = "Sinulla ei ole sovelluksia moniajovalikossa.";
+
+SUPPORT = "Tuki";
+
+TRANSLATIONS = "Käännökset";
+
+TRANSLATION_CREDITS = "Kiitos seuraaville henkilöille heidän käännöksistään.";
+
+WANT_TO_TRANSLATE = "Haluatko kääntää?";
+
+WARNING_LABEL = "Sulje kaikki sovellukset.";
+
+YES = "Kyllä";
+

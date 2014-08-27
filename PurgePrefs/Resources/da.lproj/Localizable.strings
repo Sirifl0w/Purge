@@ -1,0 +1,24 @@
+ABOUT_PURGE = "Om Purge";
+
+CANCEL = "Annuller";
+
+CONTACT_SUPPORT = "Kontakt via Twitter eller linket under for support og kontakt.";
+
+DESIGNER = "Ikon designet af @tmnlsthrn";
+
+DEVELOPER = "Udviklet af @Sirifl0w";
+
+NO_APPS_LABEL = "Du har ingen Apps i multitasking";
+
+SUPPORT = "Support";
+
+TRANSLATIONS = "Oversættelser";
+
+TRANSLATION_CREDITS = "Tak til de følgende personer for deres oversættelser.";
+
+WANT_TO_TRANSLATE = "Har du lyst til at oversætte?";
+
+WARNING_LABEL = "Dræb alle Apps";
+
+YES = "Ja";
+

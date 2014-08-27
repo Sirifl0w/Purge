@@ -1,0 +1,16 @@
+AUTO_DISMISS = "Piilota moniajo automaattisesti";
+
+EXCLUDED_APP = "Ei huomioitu sovellus";
+
+EXCLUDED_APP_DESCRIPTION = "Ehkäise valitsemasi sovelluksen sulkeminen, kun suljet kaikki sovellukset moniajovalikosta";
+
+EXCLUDE_NOW_PLAYING = "Älä huomioi nyt soittavaa sovellusta";
+
+KILL_ALL_ALERT = "Poista kaikki hälytykset";
+
+NOW_PLAYING_DESCRIPTION = "Vaikuttaa vain kun musiikkia soitetaan";
+
+SYSTEM_APPLICATIONS = "Laitesovellukset";
+
+USER_APPLICATIONS = "Käyttäjäsovellukset";
+

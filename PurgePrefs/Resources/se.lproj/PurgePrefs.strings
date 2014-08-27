@@ -1,0 +1,16 @@
+AUTO_DISMISS = "Stäng multitaskern automatiskt";
+
+EXCLUDED_APP = "Excluderade appar";
+
+EXCLUDED_APP_DESCRIPTION = "Förhindra avstängning av en enskild app. Den valda appen kommer inte tas bort från multistasking när alla appar stängs.";
+
+EXCLUDE_NOW_PLAYING = "Exkludera nuvarande musikapp";
+
+KILL_ALL_ALERT = "Notis om att avsluta alla appar";
+
+NOW_PLAYING_DESCRIPTION = "Gäller bara när musik spelas.";
+
+SYSTEM_APPLICATIONS = "Systemapplikationer";
+
+USER_APPLICATIONS = "Användarapplikationer";
+

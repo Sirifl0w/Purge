@@ -1,0 +1,24 @@
+ABOUT_PURGE = "Về Purge";
+
+CANCEL = "Không";
+
+CONTACT_SUPPORT = "Liên lạc qua Twitter hoặc đường link bên dưới để được hỗ trợ và cập nhật";
+
+DESIGNER = "Icon thiết kế bởi @tmnlsthrn";
+
+DEVELOPER = "Phát triển bởi @Sirifl0w";
+
+NO_APPS_LABEL = "Không có ứng dụng nào đang chạy";
+
+SUPPORT = "Hỗ trợ";
+
+TRANSLATIONS = "Dịch";
+
+TRANSLATION_CREDITS = "Cảm ơn những dịch viên: ";
+
+WANT_TO_TRANSLATE = "Bạn muốn dịch ?";
+
+WARNING_LABEL = "Đóng tất cả ứng dụng ?";
+
+YES = "Có";
+

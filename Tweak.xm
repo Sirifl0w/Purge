@@ -55,6 +55,11 @@ static void loadPreferences() {
     [P_PREFS release];
 }
 
+static NSString *P_LocalizedString(NSString *localizedString) { 
+	NSBundle *purgePrefsBundle = [NSBundle bundleWithPath:@"/Library/PreferenceBundles/PurgePrefs.bundle"];
+	return [purgePrefsBundle localizedStringForKey:localizedString value:@"" table:nil];
+}
+
 %hook SBAppSliderController
 
 -(void)_layout {
@@ -120,13 +125,13 @@ static void loadPreferences() {
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         if (warningAlert) {    
             if ([[self applicationList] count] > 1) {
-                killAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Kill all apps?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];       
+                killAlert = [[UIAlertView alloc] initWithTitle:nil message:P_LocalizedString(@"WARNING_LABEL") delegate:self cancelButtonTitle:P_LocalizedString(@"CANCEL") otherButtonTitles:P_LocalizedString(@"YES"), nil];       
             } else { 
-                killAlert = [[UIAlertView alloc] initWithTitle:nil message:@"You have no apps in the app switcher." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                killAlert = [[UIAlertView alloc] initWithTitle:nil message:P_LocalizedString(@"NO_APPS_LABEL") delegate:self cancelButtonTitle:P_LocalizedString(@"CANCEL") otherButtonTitles:nil];
             }
                 [killAlert show];
                 [killAlert release];
-            } else {
+            } else {	
             [self P_killAllApps];
         }
     }

@@ -1,0 +1,16 @@
+AUTO_DISMISS = "Auto Luk Multitasking";
+
+EXCLUDED_APP = "Ekskluderede Apps";
+
+EXCLUDED_APP_DESCRIPTION = "Forhindre fjernelsen af en app af dit valg. Denne app vil ikke blive fjernet fra multitasking når alle apps lukkes";
+
+EXCLUDE_NOW_PLAYING = "Luk ikke musik app i brug";
+
+KILL_ALL_ALERT = "Advar når Apps lukkes";
+
+NOW_PLAYING_DESCRIPTION = "Gælder kun når der afspilles musik";
+
+SYSTEM_APPLICATIONS = "System Apps";
+
+USER_APPLICATIONS = "Bruger installerede Apps";
+

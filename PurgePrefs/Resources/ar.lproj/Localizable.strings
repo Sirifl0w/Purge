@@ -1,0 +1,24 @@
+ABOUT_PURGE = "عن Purge";
+
+CANCEL = "إلغاء";
+
+CONTACT_SUPPORT = "التواصل عبر التويتر او الرابط في الأسفل للدعم والتحديثات.";
+
+DESIGNER = "tmnlsthrn@ تصميم الأيقونات";
+
+DEVELOPER = "Sirifl0w@ تطوير";
+
+NO_APPS_LABEL = "ليس لديك أي تطبيقات في متعدد المهام";
+
+SUPPORT = "دعم";
+
+TRANSLATIONS = "ترجمة";
+
+TRANSLATION_CREDITS = "شكرا لهؤلاء الأشخاص الذين قاموا بإضافة الترجمة";
+
+WANT_TO_TRANSLATE = "هل تريد إضافة ترجمة ؟";
+
+WARNING_LABEL = "إغلاق كل التطبيقات ؟";
+
+YES = "نعم";
+

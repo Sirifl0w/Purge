@@ -1,0 +1,24 @@
+ABOUT_PURGE = "Informazioni su Purge";
+
+CANCEL = "Annulla";
+
+CONTACT_SUPPORT = "Contattaci tramite Twitter o il link sottostante per supporto e aggiornamenti.";
+
+DESIGNER = "Icona disegnata da @tmnlsthrn";
+
+DEVELOPER = "Sviluppato da @Sirifl0w";
+
+NO_APPS_LABEL = "Non ci sono applicazioni terminabili nel selettore.";
+
+SUPPORT = "Supporto";
+
+TRANSLATIONS = "Traduzioni";
+
+TRANSLATION_CREDITS = "Ringrazio le seguenti persone per le traduzioni.";
+
+WANT_TO_TRANSLATE = "Vuoi tradurre?";
+
+WARNING_LABEL = "Terminare tutte le applicazioni?";
+
+YES = "Si";
+

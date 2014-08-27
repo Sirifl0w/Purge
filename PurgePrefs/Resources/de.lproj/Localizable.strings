@@ -1,0 +1,24 @@
+ABOUT_PURGE = "Über Purge";
+
+CANCEL = "Abbruch";
+
+CONTACT_SUPPORT = "Kontaktiere uns über Twitter oder weiter unten ist ein link für Support und updates.";
+
+DESIGNER = "Icon designed von @tmnlsthrn";
+
+DEVELOPER = "Entwickelt von @Sirifl0w";
+
+NO_APPS_LABEL = "Du hast keine Apps im Switcher";
+
+SUPPORT = "Support";
+
+TRANSLATIONS = "Übersetzung";
+
+TRANSLATION_CREDITS = "Danke für die Übersetzung der folgenden Leuten.";
+
+WANT_TO_TRANSLATE = "Willst du übersetzen?";
+
+WARNING_LABEL = "Alle apps schließen?";
+
+YES = "Ja";
+

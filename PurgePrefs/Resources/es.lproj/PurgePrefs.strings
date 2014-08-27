@@ -1,9 +1,16 @@
-KALabel = "Omitir todas las alertas";
-ADLabel = "Salir de la multitarea automáticamente";
-NPCondition = "Solamente funciona cuando la música está sonando.";
-NPLabel = "Excluir aplicación de música”;
-BLDescription = "Impedir que se cierren las aplicaciones seleccionadas. La aplicación seleccionada no se cerrará en la multitarea después de cerrar todas las aplicaciones.";
-BLLabel = "Aplicaciones excluidas";
-WarningLabel = "¿Cerrar todas las aplicaciones?";
-NoAppLabel = "No tienes aplicaciones en la multitarea.";
-//credit - @decueme
+AUTO_DISMISS = "Autocerrar la multitarea";
+
+EXCLUDED_APP = "Excluir Aplicaciones";
+
+EXCLUDED_APP_DESCRIPTION = "Elige que aplicaciones no se cerraran. Las aplicaciones elegidas no serán eliminadas de la multitarea cuando se cierren todas las aplicaciones.";
+
+EXCLUDE_NOW_PLAYING = "Excluir la aplicación Música";
+
+KILL_ALL_ALERT = "Ocultar todas las alertas";
+
+NOW_PLAYING_DESCRIPTION = "Solamente se aplica cuando la música esta sonando.";
+
+SYSTEM_APPLICATIONS = "Aplicaciones del Sistema";
+
+USER_APPLICATIONS = "Aplicaciones del Usuario";
+

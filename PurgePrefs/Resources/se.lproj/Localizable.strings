@@ -1,0 +1,24 @@
+ABOUT_PURGE = "Om Purge";
+
+CANCEL = "Avbryt";
+
+CONTACT_SUPPORT = "Kontakt via Twiter eller link nedan för support och uppdateringar.";
+
+DESIGNER = "Ikondesign av @tmnlsthrn";
+
+DEVELOPER = "Utvecklad av @Sirifl0w";
+
+NO_APPS_LABEL = "Du har inga appar i mulitaskern.";
+
+SUPPORT = "Support";
+
+TRANSLATIONS = "Översättningar";
+
+TRANSLATION_CREDITS = "Tack för att du följer folk för deras översättningar.";
+
+WANT_TO_TRANSLATE = "Vill du översätta?";
+
+WARNING_LABEL = "Stäng av alla appar?";
+
+YES = "Ja";
+

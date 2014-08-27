@@ -1,0 +1,24 @@
+ABOUT_PURGE = "Acerca de Purge";
+
+CANCEL = "Cancelar";
+
+CONTACT_SUPPORT = "Contacta vía Twitter o mediante el enlace para obtener ayuda o actualizaciones.";
+
+DESIGNER = "Icono diseñado por @tmnlsthrn";
+
+DEVELOPER = "Desarrollado por @Sirifl0w";
+
+NO_APPS_LABEL = "No tienes aplicaciones en la multitarea";
+
+SUPPORT = "Ayuda";
+
+TRANSLATIONS = "Traducciones";
+
+TRANSLATION_CREDITS = "Gracias a todos por sus traducciones.";
+
+WANT_TO_TRANSLATE = "¿Quieres traducir?";
+
+WARNING_LABEL = "¿Cerrar todas las aplicaciones?";
+
+YES = "Si";
+

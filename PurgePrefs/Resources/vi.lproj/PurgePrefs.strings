@@ -1,0 +1,16 @@
+AUTO_DISMISS = "Tự động đóng đa nhiệm";
+
+EXCLUDED_APP = "Các ứng dụng không bị đóng";
+
+EXCLUDED_APP_DESCRIPTION = "Các ứng dụng sau sẽ được loại trừ khi người dùng đóng tất cả ứng dụng ở màn hình đa nhiệm. Các ứng dụng này chỉ có thể đóng bằng cách vuốt trực tiếp";
+
+EXCLUDE_NOW_PLAYING = "Không đóng các ứng dụng chơi nhạc";
+
+KILL_ALL_ALERT = "Thông báo đóng tất cả";
+
+NOW_PLAYING_DESCRIPTION = "Chỉ có tác dụng khi nhạc đang phát";
+
+SYSTEM_APPLICATIONS = "Ứng dụng hệ thống";
+
+USER_APPLICATIONS = "Ứng dụng thường";
+

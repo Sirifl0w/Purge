@@ -1,0 +1,16 @@
+AUTO_DISMISS = "Sluit appkiezer automatisch";
+
+EXCLUDED_APP = "Uitgesloten app";
+
+EXCLUDED_APP_DESCRIPTION = "Voorkom het sluiten van een app naar keuze. De gekozen app zal niet worden gesloten wanneer je alle apps sluit.";
+
+EXCLUDE_NOW_PLAYING = "Sluit de nu spelende app uit";
+
+KILL_ALL_ALERT = "Waarschuwing bij alles sluiten";
+
+NOW_PLAYING_DESCRIPTION = "Is alleen van toepassing wanneer er muziek wordt afgespeeld.";
+
+SYSTEM_APPLICATIONS = "Systeem applicaties";
+
+USER_APPLICATIONS = "Gebruikers applicaties";
+

@@ -13,18 +13,19 @@
 
 #define STATUS_PATH @"/var/lib/dpkg/status"
 #define DPKGL_PATH @"/var/tmp/dpkgl.log"
-#define PURGE_VERSION @"v1.3" // remember to change
+#define PURGE_VERSION @"v1.4beta-4" // remember to change
+
+static NSString *P_LocalizedString(NSString *localizedString) {
+	NSBundle *purgePrefsBundle = [NSBundle bundleWithPath:@"/Library/PreferenceBundles/PurgePrefs.bundle"];
+	return [purgePrefsBundle localizedStringForKey:localizedString value:@"" table:nil];
+}
 
 @interface UIImage (Purge)
-
 + (id)imageNamed:(id)arg1 inBundle:(id)arg2;
-
 @end
 
 @interface UIAlertView (Purge)
-
 - (id)initWithTitle:(id)arg1 message:(id)arg2 delegate:(id)arg3 cancelButtonTitle:(id)arg4 otherButtonTitles:(id)arg5;
-
 @end
 
 @implementation PurgePrefsListController
@@ -154,9 +155,12 @@
 }
 - (void)moreInfo {
     
-    NSString *_content = [NSString stringWithFormat:@"Developed by @Sirifl0w \n Icon designed by @iJailpod \n \n Contact via Twitter or link below for support. \n %@", PURGE_VERSION];
+    NSString *developer = P_LocalizedString(@"DEVELOPER");
+    NSString *designer = P_LocalizedString(@"DESIGNER");
+    NSString *contactSupport = P_LocalizedString(@"CONTACT_SUPPORT");
+    NSString *_alertContent = [NSString stringWithFormat:@"%@ \n %@ \n \n %@ \n %@", developer, designer, contactSupport, PURGE_VERSION];
     
-    UIAlertView *_moreInfo = [[UIAlertView alloc] initWithTitle:@"About Purge" message:_content delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Support", nil];
+    UIAlertView *_moreInfo = [[UIAlertView alloc] initWithTitle:P_LocalizedString(@"ABOUT_PURGE") message:_alertContent delegate:self cancelButtonTitle:P_LocalizedString(@"CANCEL") otherButtonTitles:P_LocalizedString(@"SUPPORT"), P_LocalizedString(@"TRANSLATIONS"), P_LocalizedString(@"WANT_TO_TRANSLATE"), nil];
     [_moreInfo show];
     
 }
@@ -192,6 +196,19 @@
         [mailCont addAttachmentData:fileData mimeType:@"text/plain" fileName:_fileName];
         [self presentViewController:mailCont animated:YES completion:NULL];
         
+    }
+    
+    if (buttonIndex == 2) {
+        
+        NSString *translationCredits = [NSString stringWithFormat:@"%@ \n \n @Jlndk \n @p0sixcon \n @addhenri \n @tmnlsthrn \n @Decueme \n @ducpayaya \n @iD7me \n @viandachiens \n @__Jean____ \n @Matthias_Reichl \n @sagitt", P_LocalizedString(@"TRANSLATION_CREDITS")];
+        
+        UIAlertView *_translations = [[UIAlertView alloc] initWithTitle:P_LocalizedString(@"TRANSLATIONS") message:translationCredits delegate:self cancelButtonTitle:P_LocalizedString(@"CANCEL") otherButtonTitles:nil];
+        [_translations show];
+        
+    }
+    
+    if (buttonIndex == 3) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://docs.google.com/forms/d/1LBLLaNeTssSUVpmGR2WYGcf_wwZB4j4mU9met5mCk_A/viewform"]];
     }
 }
 

@@ -1,0 +1,24 @@
+ABOUT_PURGE = "About Purge";
+
+CANCEL = "Cancel";
+
+CONTACT_SUPPORT = "Contact via Twitter or link below for support and updates.";
+
+DESIGNER = "Icon designed by @tmnlsthrn";
+
+DEVELOPER = "Developed by @Sirifl0w";
+
+NO_APPS_LABEL = "You have no apps in the app switcher.";
+
+SUPPORT = "Support";
+
+TRANSLATIONS = "Translations";
+
+TRANSLATION_CREDITS = "Thank you to the following people for their translations.";
+
+WANT_TO_TRANSLATE = "Want to translate?";
+
+WARNING_LABEL = "Kill all apps?";
+
+YES = "Yes";
+

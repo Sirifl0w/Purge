@@ -1,0 +1,24 @@
+ABOUT_PURGE = "Over Purge";
+
+CANCEL = "Annuleer";
+
+CONTACT_SUPPORT = "Neem contact op via Twitter of de link hieronder voor ondersteuning en updates.";
+
+DESIGNER = "Icoon ontworpen door @tmnlsthrn";
+
+DEVELOPER = "Ontwikkeld door @Sirifl0w";
+
+NO_APPS_LABEL = "Je hebt geen apps in de appkiezer.";
+
+SUPPORT = "Ondersteuning";
+
+TRANSLATIONS = "Vertalingen";
+
+TRANSLATION_CREDITS = "Dank aan de volgende personen voor hun vertalingen.";
+
+WANT_TO_TRANSLATE = "Wil je vertalen?";
+
+WARNING_LABEL = "Alle apps sluiten?";
+
+YES = "Ja";
+
