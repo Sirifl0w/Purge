@@ -19,4 +19,10 @@ v1.3
 - Ability to choose ONE app that will not be removed from the app switcher (blacklisted app).
 - Localization support.
 
-**Translators wanted!** Contact me via Twitter (@sirifl0w) or email (sirifl0w@gmail.com) if you wish to translate.
+v1.4beta-1
+
+- More and improved localization. Additions include Vietnamese, Danish, Swedish, Finnish and more...
+- Tweaks to the more information alert in preferences along with credits to translators and the link to the translation form.
+- KNOWN ISSUES - User and System Application strings in Excluded App view (AppList bundle) does not show corresponding translated text.
+
+**Translators wanted!** Please fill out the translation form for Purge that can be found here - https://docs.google.com/forms/d/1LBLLaNeTssSUVpmGR2WYGcf_wwZB4j4mU9met5mCk_A/viewform. Please submit improved translations if you feel current translations are incorrect or inadequate. See form for details.
