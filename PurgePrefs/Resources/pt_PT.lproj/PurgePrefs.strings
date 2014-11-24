@@ -1,0 +1,16 @@
+AUTO_DISMISS = "Fechar automaticamente as multitarefas";
+
+EXCLUDED_APP = "App excluída";
+
+EXCLUDED_APP_DESCRIPTION = "Prevenir a remoção duma app à sua escolha. A app escolhida não será removida das multitarefas ao fechar todas as apps.";
+
+EXCLUDE_NOW_PLAYING = "Excluir a app que está a tocar música";
+
+KILL_ALL_ALERT = "Alerta para fechar todas";
+
+NOW_PLAYING_DESCRIPTION = "Aplicável apenas quando está a tocar música.";
+
+SYSTEM_APPLICATIONS = "Aplicações do sistema";
+
+USER_APPLICATIONS = "Aplicações do utilizador";
+
